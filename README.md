@@ -75,3 +75,25 @@ spec:
 ```                  
 - In this example, the env section specifies environment variables that retrieve values from the Kubernetes Secret using the secretKeyRef reference.
 By following these steps, External Secrets integrates with AWS Secrets Manager to securely retrieve and inject the secret data into your Kubernetes pods. This allows you to centralize the management of sensitive data in external secret management systems while leveraging Kubernetes to handle the deployment and lifecycle management of your applications.
+
+# What is external-secret wehbook
+
+- In Kubernetes, a webhook is an HTTP callback mechanism that allows external systems or services to intercept and modify the behavior of API requests sent to the Kubernetes API server. Webhooks enable you to extend and customize the behavior of Kubernetes without modifying the core codebase.
+
+- When an application like External-Secret needs a webhook, it typically refers to an admission webhook. Admission webhooks are a type of Kubernetes webhook that intercepts and validates API requests to the Kubernetes API server before they are persisted. They allow you to enforce custom admission policies or perform additional actions on the API requests.
+
+- External-Secret is an application that enables you to store and retrieve secrets from external secret management systems, such as AWS Secrets Manager or HashiCorp Vault, and make them available as Kubernetes Secrets. It uses an admission webhook to intercept requests to create or update Secret objects in Kubernetes.
+
+# Here's how External-Secret's webhook works:
+
+- Webhooks, such as the admission webhook used by External-Secret, provide a powerful mechanism to extend Kubernetes and implement custom logic and policies for handling API requests. They enable you to integrate external services and perform actions based on specific events or conditions, enhancing the functionality and security of your Kubernetes cluster.
+
+  - When you create or update a Secret object in Kubernetes, the request is sent to the Kubernetes API server.
+  - The admission webhook configured by External-Secret intercepts the request before it is persisted.
+  - The webhook validates the request and performs actions to retrieve the secret data from the external secret management system.
+  - The secret data is then stored in the Kubernetes Secret object, making it available for use by other Kubernetes resources.
+  - The modified request is sent back to the Kubernetes API server, which persists the Secret object with the retrieved secret data.
+  - By using a webhook, External-Secret ensures that secret data from external systems is securely and dynamically fetched and stored in Kubernetes Secrets. 
+  - It allows you to centralize secret management and integrate with various external secret providers while still leveraging the native Kubernetes Secret resource.
+
+
